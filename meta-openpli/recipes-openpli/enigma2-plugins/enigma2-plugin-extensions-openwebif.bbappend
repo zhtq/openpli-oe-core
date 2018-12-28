@@ -96,6 +96,7 @@ python do_cleanup () {
         ('lunix3-4k', 'lunix3-4k.png', 'qviart.png', 'qviart.html'),
         ('lunix', 'lunix.png', 'qviart.png', 'qviart.html'),
         ('e4hd', 'e4hd.png', 'e4hd.png', 'e4hd.html'),
+        ('sf8008', 'sf8008.png', 'sf8008.png', 'sf8008.html'),
     ]
 
     import os

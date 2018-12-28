@@ -7,10 +7,10 @@ inherit gitpkgv autotools pkgconfig
 
 PV = "1.0+git${SRCPV}"
 PKGV = "1.0+git${GITPKGV}"
-VER ?= "${@bb.utils.contains('MACHINE_FEATURES', 'hisil', '-v2', '', d)}"
-
-SRC_URI = "git://github.com/zgemma-star/e2plugins.git;protocol=git"
-
+#VER ?= "${@bb.utils.contains('MACHINE_FEATURES', 'hisil', '-v2', '', d)}"
+VER ?= "-sf8008"
+#SRC_URI = "git://github.com/zgemma-star/e2plugins.git;protocol=git"
+SRC_URI = "git://github.com/oe-alliance/e2plugins.git;protocol=git"
 PACKAGES = "${PN}"
 RDEPENDS_${PN}  = "qtwebkit"
 
@@ -32,14 +32,12 @@ do_install() {
 	install -d ${D}/usr/share/stalker
 	cp -rp ${S}/usr/share/stalker/* ${D}/usr/share/stalker/
 	chmod -R a+rX ${D}/usr/share/stalker/
-	install -m 0755 ${S}/plugin/__init__.py ${D}/usr/lib/${QtStalker}
-	install -m 0755 ${S}/plugin/browser.py ${D}/usr/lib/${QtStalker}
-	install -m 0755 ${S}/plugin/datasocket.py ${D}/usr/lib/${QtStalker}
-	install -m 0755 ${S}/plugin/plugin.py ${D}/usr/lib/${QtStalker}
-	install -m 0755 ${S}/plugin/stalker.py ${D}/usr/lib/${QtStalker}
-	install -m 0755 ${S}/plugin/stalker.png ${D}/usr/lib/${QtStalker}
+	install -m 0755 ${S}/plugin/*.py ${D}/usr/lib/${QtStalker}
+
+	install -m 0755 ${S}/plugin/*.png ${D}/usr/lib/${QtStalker}
 	install -d ${D}/${bindir}
-	install -m 0755 ${S}/stalker ${D}${bindir}
+	install -m 0755 ${S}/stalker* ${D}${bindir}
+	cp -rp ${S}/plugin/locale ${D}/usr/lib/${QtStalker}
 }
 
 do_package_qa() {
